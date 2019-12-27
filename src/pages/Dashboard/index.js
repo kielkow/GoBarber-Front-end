@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import {
   format,
   subDays,
@@ -11,11 +12,9 @@ import {
   parseISO,
 } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
-import pt from 'date-fns/locale/pt';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import api from '~/services/api';
-
+import pt from 'date-fns/locale/pt-BR';
 import { Container, Time } from './styles';
+import api from '~/services/api';
 
 const range = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
@@ -41,7 +40,7 @@ export default function Dashboard() {
         const compareDate = utcToZonedTime(checkDate, timezone);
 
         return {
-          time: `${hour}:00`,
+          time: `${hour}:00h`,
           past: isBefore(compareDate, new Date()),
           appointment: response.data.find(a =>
             isEqual(parseISO(a.date), compareDate)
